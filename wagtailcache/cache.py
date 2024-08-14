@@ -24,7 +24,7 @@ from django.utils.cache import get_max_age
 from django.utils.cache import has_vary_header
 from django.utils.cache import learn_cache_key
 from django.utils.cache import patch_response_headers
-from django.utils.deprecation import GetResponseCallable, MiddlewareMixin
+from django.utils.deprecation import MiddlewareMixin
 from wagtail import hooks
 
 from wagtailcache.settings import wagtailcache_settings
@@ -35,15 +35,15 @@ logger = logging.getLogger("wagtail-cache")
 
 
 class MiddlewareMixinFixed(MiddlewareMixin):
-    # def __init__(
-    #     self, get_response: Callable[[HttpRequest], HttpResponse] | None = ...
-    # ) -> None:
-    #     super().__init__(get_response)
-    #     logger.info(
-    #         f"MiddlewareMixin ------- init ------------------------------------"
-    #     )
-    #     print(f"MiddlewareMixin {vars(self)}")
-    #     # logger.info(f"MiddlewareMixin {vars(self)}")
+    def __init__(
+        self, get_response: Callable[[HttpRequest], HttpResponse] | None = ...
+    ) -> None:
+        super().__init__(get_response)
+        logger.info(
+            f"MiddlewareMixin ------- init ------------------------------------"
+        )
+        print(f"MiddlewareMixin {vars(self)}")
+        # logger.info(f"MiddlewareMixin {vars(self)}")
 
     def _async_check(self):
         """
