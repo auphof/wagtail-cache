@@ -201,7 +201,7 @@ def _learn_cache_key(
     return learn_cache_key(r, s, t, None, c)
 
 
-class FetchFromCacheMiddleware(MiddlewareMixinFixed):
+class FetchFromCacheMiddleware(MiddlewareMixin):
     """
     Loads a request from the cache if it exists.
     Mostly stolen from ``django.middleware.cache.FetchFromCacheMiddleware``.
@@ -210,7 +210,7 @@ class FetchFromCacheMiddleware(MiddlewareMixinFixed):
     def __init__(self, get_response=None):
         self._wagcache = caches[wagtailcache_settings.WAGTAIL_CACHE_BACKEND]
         self.get_response = get_response
-        self._async_check()
+        # self._async_check()
 
     def process_request(self, request: WSGIRequest) -> Optional[HttpResponse]:
         if not wagtailcache_settings.WAGTAIL_CACHE:
@@ -268,7 +268,7 @@ class FetchFromCacheMiddleware(MiddlewareMixinFixed):
         return response
 
 
-class UpdateCacheMiddleware(MiddlewareMixinFixed):
+class UpdateCacheMiddleware(MiddlewareMixin):
     """
     Saves a response to the cache.
     Mostly stolen from ``django.middleware.cache.UpdateCacheMiddleware``.
@@ -277,7 +277,7 @@ class UpdateCacheMiddleware(MiddlewareMixinFixed):
     def __init__(self, get_response=None):
         self._wagcache = caches[wagtailcache_settings.WAGTAIL_CACHE_BACKEND]
         self.get_response = get_response
-        self._async_check()
+        # self._async_check()
 
     def process_response(
         self, request: WSGIRequest, response: HttpResponse
