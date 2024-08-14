@@ -38,9 +38,12 @@ class MiddlewareMixinFixed(MiddlewareMixin):
     def __init__(
         self, get_response: Callable[[HttpRequest], HttpResponse] | None = ...
     ) -> None:
+        logger.info(
+            f"MiddlewareMixinFixed ------- pre super().__init__ ------------------------------------"
+        )
         super().__init__(get_response)
         logger.info(
-            f"MiddlewareMixin ------- init ------------------------------------"
+            f"MiddlewareMixinFixed ------- post super().__init__  ------------------------------------"
         )
         print(f"MiddlewareMixin {vars(self)}")
         # logger.info(f"MiddlewareMixin {vars(self)}")
@@ -208,6 +211,7 @@ class FetchFromCacheMiddleware(MiddlewareMixin):
     """
 
     def __init__(self, get_response=None):
+        super().__init__(get_response)
         self._wagcache = caches[wagtailcache_settings.WAGTAIL_CACHE_BACKEND]
         self.get_response = get_response
         # self._async_check()
@@ -275,6 +279,7 @@ class UpdateCacheMiddleware(MiddlewareMixin):
     """
 
     def __init__(self, get_response=None):
+        super().__init__(get_response)
         self._wagcache = caches[wagtailcache_settings.WAGTAIL_CACHE_BACKEND]
         self.get_response = get_response
         # self._async_check()
