@@ -35,15 +35,15 @@ logger = logging.getLogger("wagtail-cache")
 
 
 class MiddlewareMixinFixed(MiddlewareMixin):
-    def __init__(
-        self, get_response: Callable[[HttpRequest], HttpResponse] | None = ...
-    ) -> None:
-        super().__init__(get_response)
-        logger.info(
-            f"MiddlewareMixin ------- init ------------------------------------"
-        )
-        print(f"MiddlewareMixin {vars(self)}")
-        # logger.info(f"MiddlewareMixin {vars(self)}")
+    # def __init__(
+    #     self, get_response: Callable[[HttpRequest], HttpResponse] | None = ...
+    # ) -> None:
+    #     super().__init__(get_response)
+    #     logger.info(
+    #         f"MiddlewareMixin ------- init ------------------------------------"
+    #     )
+    #     print(f"MiddlewareMixin {vars(self)}")
+    #     # logger.info(f"MiddlewareMixin {vars(self)}")
 
     def _async_check(self):
         """
